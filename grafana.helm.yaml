@@ -1,0 +1,13 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: prometheus-operator
+  namespace: prometheus-operator
+spec:
+  chart: stable/prometheus-operator
+  targetNamespace: prometheus-operator
+  valuesContent: |-
+    master:
+      image: alpine/helm
+      tag: latest
+      alpine/helm: /grafana
