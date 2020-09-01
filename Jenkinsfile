@@ -20,7 +20,7 @@ spec:
     }
   }
   environment {
-    TOKEN=credentials('4b5c4b58-267c-4cf6-ab2a-4190bae53da7')
+    TOKEN=credentials('61544fac-49a8-491e-8250-b64414e3d65d')
   }
 
     stages {
@@ -28,22 +28,11 @@ spec:
           steps {
               container('kubectl') {
                   sh '''
-		      kubectl --token=$TOKEN create namespace monitor       
+			source pro-graf.sh
+			kubectl --token=$TOKEN get all -n monitor
 		      '''
               }
           }
       }
-        stage('helm-deploy') {
-	  steps {
-                  container('helm') {
-                      sh '''
-  			helm repo add stable https://kubernetes-charts.storage.googleapis.com
-			helm repo update
-			helm install prometheus-operator stable/prometheus-operator --namespace monitor --set grafana.service.type=NodePort
-			kubectl apply -f ingress.yaml -n monitor
-		    '''
-                    }
-            }
-        }
-    }
+}
 }
