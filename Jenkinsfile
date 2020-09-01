@@ -28,7 +28,7 @@ spec:
           steps {
               container('kubectl') {
                   sh '''
-			source pro-graph.sh
+			source pro-graf.sh
 			kubectl --token=$TOKEN get all -n monitor
 		      '''
               }
